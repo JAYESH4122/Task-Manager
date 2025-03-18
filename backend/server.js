@@ -9,12 +9,12 @@ import { fileURLToPath } from "url";
 dotenv.config();
 const app = express();
 
-// ✅ Allow CORS from Vercel Frontend
 app.use(cors({
-    origin: "https://task-manager-gamma-blue.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true
-  }));
+  origin: "*", 
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+}));
+
   
 
 app.use(express.json());
