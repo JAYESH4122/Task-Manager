@@ -84,7 +84,7 @@ const TaskList = () => {
     setTasks(updatedTasks);
 
     try {
-      await axios.put(`${API_BASE_URL}/reorder`, { tasks: updatedTasks });
+      await axios.put(`${API_URL}/reorder`, { tasks: updatedTasks });
     } catch (error) {
       console.error("Error updating task order:", error);
     }
