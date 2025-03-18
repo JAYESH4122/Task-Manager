@@ -39,7 +39,7 @@ const TaskList = () => {
 
   const toggleComplete = async (id, completed) => {
     try {
-      const response = await axios.put(`https://task-manager-9spa.onrender.com/api/${id}`, {
+      const response = await axios.put(`https://task-manager-9spa.onrender.com/${id}`, {
         completed: !completed,
       });
       setTasks(tasks.map((task) => (task._id === id ? response.data : task)));
@@ -130,9 +130,9 @@ const TaskList = () => {
         </Droppable>
       </DragDropContext>
 
-      <button className="add-task-btn" onClick={() => navigate("/add-task")}>
-      <FaPlus />
-    </button>
+      <button className="add-task-btn" onClick={() => window.location.href = "/add-task"}>
+        <FaPlus />
+      </button>
 
       {editTask && (
         <div className="modal">

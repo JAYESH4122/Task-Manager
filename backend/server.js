@@ -11,7 +11,7 @@ const app = express();
 
 // ✅ Allow CORS from Vercel Frontend
 app.use(cors({
-    origin: "https://task-manager-gamma-blue.vercel.app/", // Removed the slash
+    origin: "https://task-manager-ln2hsfl2i-jayesh-pjs-projects.vercel.app/", // Removed the slash
     methods: "GET,POST,PUT,DELETE",
     credentials: true
   }));
