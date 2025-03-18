@@ -24,7 +24,7 @@ const TaskList = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/tasks`);
+      const response = await axios.get(`${API_URL}/`);
       console.log("Fetched Data:", response.data); // Debugging log
       setTasks(response.data);
     } catch (error) {
