@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "*",  // 🔥 Allow a
+  origin: "https://task-manager-rlsi.vercel.app",  // 🔥 Allow a
   methods: "GET,POST,PUT,DELETE",
   credentials: true
 }));
