@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaMoon, FaSun, FaTrash, FaEdit, FaPlus } from "react-icons/fa";
@@ -11,6 +12,7 @@ const TaskList = () => {
   const [editTask, setEditTask] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTasks();
@@ -22,12 +24,15 @@ const TaskList = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/`);
+      const response = await axios.get(`${API_URL}/api/tasks`);
+      console.log("Fetched Data:", response.data); // Debugging log
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
+      setTasks([]); // Ensure tasks is always an array
     }
   };
+  
 
   const deleteTask = async (id) => {
     try {

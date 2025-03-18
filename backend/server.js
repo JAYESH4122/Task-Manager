@@ -1,16 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import path from "path";
 import connectDB from "./config/db.js";
 import taskRoutes from "./routes/taskRoutes.js";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "https://task-manager-8zvvkavkr-jayesh-pjs-projects.vercel.app", 
+  origin: "*",  // 🔥 Allow a
   methods: "GET,POST,PUT,DELETE",
   credentials: true
 }));
