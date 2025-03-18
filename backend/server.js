@@ -11,7 +11,7 @@ const app = express();
 
 // ✅ Allow CORS from Vercel Frontend
 app.use(cors({
-    origin: "https://task-manager-gamma-blue.vercel.app", // Removed the slash
+    origin: "https://task-manager-gamma-blue.vercel.app/", // Removed the slash
     methods: "GET,POST,PUT,DELETE",
     credentials: true
   }));
@@ -23,12 +23,9 @@ app.use(express.json());
 connectDB();
 
 // ✅ API Routes
-app.use("/api/tasks", taskRoutes);
+app.use("/", taskRoutes);
 
 // ✅ Root Route to Fix "Cannot GET /"
-app.get("/", (req, res) => {
-  res.send("Backend is running successfully!");
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));

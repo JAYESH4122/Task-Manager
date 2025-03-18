@@ -21,7 +21,7 @@ const TaskList = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get("https://task-manager-9spa.onrender.com/api/tasks");
+      const response = await axios.get("https://task-manager-9spa.onrender.com/");
       setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -30,7 +30,7 @@ const TaskList = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`https://task-manager-9spa.onrender.com/api/tasks/${id}`);
+      await axios.delete(`https://task-manager-9spa.onrender.com/${id}`);
       setTasks(tasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -39,7 +39,7 @@ const TaskList = () => {
 
   const toggleComplete = async (id, completed) => {
     try {
-      const response = await axios.put(`https://task-manager-9spa.onrender.com/api/tasks/${id}`, {
+      const response = await axios.put(`https://task-manager-9spa.onrender.com/api/${id}`, {
         completed: !completed,
       });
       setTasks(tasks.map((task) => (task._id === id ? response.data : task)));
@@ -57,7 +57,7 @@ const TaskList = () => {
   const saveEditTask = async () => {
     if (!editTitle.trim()) return;
     try {
-      const response = await axios.put(`https://task-manager-9spa.onrender.com/api/tasks/${editTask._id}`, {
+      const response = await axios.put(`https://task-manager-9spa.onrender.com/${editTask._id}`, {
         title: editTitle,
         description: editDescription,
       });
@@ -78,7 +78,7 @@ const TaskList = () => {
     setTasks(updatedTasks);
 
     try {
-      await axios.put("https://task-manager-9spa.onrender.com/api/tasks/reorder", { tasks: updatedTasks });
+      await axios.put("https://task-manager-9spa.onrender.com/reorder", { tasks: updatedTasks });
     } catch (error) {
       console.error("Error updating task order:", error);
     }
@@ -130,9 +130,9 @@ const TaskList = () => {
         </Droppable>
       </DragDropContext>
 
-      <button className="add-task-btn" onClick={() => window.location.href = "/add-task"}>
-        <FaPlus />
-      </button>
+      <button className="add-task-btn" onClick={() => navigate("/add-task")}>
+      <FaPlus />
+    </button>
 
       {editTask && (
         <div className="modal">

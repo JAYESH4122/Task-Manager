@@ -15,7 +15,7 @@ const AddTask = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("https://task-manager-9spa.onrender.com/api/tasks", task);
+    await axios.post("https://task-manager-9spa.onrender.com/", task);
     navigate("/");
   };
 
