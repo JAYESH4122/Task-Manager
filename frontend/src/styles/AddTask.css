@@ -1,0 +1,81 @@
+/* Background and Layout */
+.add-task-container {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dark-mode .add-task-container {
+  background-color: #1e1e1e;
+}
+
+/* Form Container */
+.add-task-form {
+  background: white;
+  color: #333;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dark-mode .add-task-form {
+  background: #2c2c2c;
+  color: white;
+}
+
+/* Title */
+.form-title {
+  font-weight: bold !important;
+  font-size: 24px !important;
+  color: #007bff;
+  margin-bottom: 20px !important;
+}
+
+.dark-mode .form-title {
+  color: #1da1f2;
+}
+
+/* Input Fields */
+.task-input {
+  margin-bottom: 15px !important;
+  background: #f1f1f1 !important;
+  border-radius: 6px;
+}
+
+.dark-mode .task-input {
+  background: #444 !important;
+  color: white !important;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: #007bff !important;
+  color: white !important;
+  width: 100%;
+  padding: 10px !important;
+  font-size: 16px !important;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.submit-btn:hover {
+  background: #0056b3 !important;
+  transform: scale(1.05);
+}
+
+.dark-mode .submit-btn {
+  background: #1da1f2 !important;
+}
+
+.dark-mode .submit-btn:hover {
+  background: #0d8ae6 !important;
+}
