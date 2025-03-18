@@ -36,7 +36,7 @@ const TaskList = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`${API_BASE_URL}/${id}`);
+      await axios.delete(`${API_URL}/${id}`);
       setTasks(tasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -45,7 +45,7 @@ const TaskList = () => {
 
   const toggleComplete = async (id, completed) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/${id}`, {
+      const response = await axios.put(`${API_URL}/${id}`, {
         completed: !completed,
       });
       setTasks(tasks.map((task) => (task._id === id ? response.data : task)));
@@ -63,7 +63,7 @@ const TaskList = () => {
   const saveEditTask = async () => {
     if (!editTitle.trim()) return;
     try {
-      const response = await axios.put(`${API_BASE_URL}/${editTask._id}`, {
+      const response = await axios.put(`${API_URL}/${editTask._id}`, {
         title: editTitle,
         description: editDescription,
       });
