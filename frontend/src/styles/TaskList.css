@@ -187,3 +187,121 @@ body {
 .dark-mode .add-task-btn:hover {
   background: #0d8ae6;
 }
+
+/* Edit Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+}
+
+.dark-mode .modal-content {
+  background: #2c2c2c;
+  color: white;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #007bff;
+}
+
+.dark-mode .modal-content h3 {
+  color: #1da1f2;
+}
+
+/* Input Fields */
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.3s;
+}
+
+.dark-mode .modal-content input,
+.dark-mode .modal-content textarea {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.modal-content textarea {
+  height: 80px;
+  resize: none;
+}
+
+/* Buttons */
+.modal-content .save-btn,
+.modal-content .cancel-btn {
+  width: 45%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.save-btn {
+  background: #007bff;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #0056b3;
+}
+
+.cancel-btn {
+  background: #ccc;
+  color: black;
+}
+
+.cancel-btn:hover {
+  background: #999;
+}
+
+.dark-mode .save-btn {
+  background: #1da1f2;
+}
+
+.dark-mode .save-btn:hover {
+  background: #0d8ae6;
+}
+
+.dark-mode .cancel-btn {
+  background: #555;
+  color: white;
+}
+
+.dark-mode .cancel-btn:hover {
+  background: #777;
+}
