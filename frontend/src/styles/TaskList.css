@@ -15,7 +15,7 @@ body {
 
 /* Task Manager Container */
 .task-container {
-  max-width: 600px;
+  max-width: 900px;
   margin: 50px auto;
   padding: 20px;
   background: white;
@@ -25,6 +25,25 @@ body {
 
 .dark-mode .task-container {
   background: #2c2c2c;
+}
+
+/* Task Sections */
+.task-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #007bff;
+}
+
+.dark-mode .section-title {
+  color: #1da1f2;
+  border-bottom-color: #1da1f2;
 }
 
 /* Header */
@@ -132,7 +151,7 @@ body {
   gap: 10px;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn, .delete-btn, .progress-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -143,6 +162,10 @@ body {
   color: #007bff;
 }
 
+.progress-btn {
+  color: #28a745;
+}
+
 .delete-btn {
   color: red;
 }
@@ -151,8 +174,26 @@ body {
   color: #0056b3;
 }
 
+.progress-btn:hover {
+  color: #218838;
+}
+
 .delete-btn:hover {
   color: darkred;
+}
+
+/* Progress Preview */
+.progress-preview {
+  margin-top: 5px;
+}
+
+.progress-preview small {
+  color: #28a745;
+  font-style: italic;
+}
+
+.dark-mode .progress-preview small {
+  color: #4ade80;
 }
 
 /* Circular Add Task Button */
@@ -258,17 +299,147 @@ body {
   resize: none;
 }
 
+/* Modal Buttons Layout */
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
 /* Buttons */
 .modal-content .save-btn,
 .modal-content .cancel-btn {
   width: 45%;
   padding: 10px;
-  margin-top: 15px;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
+}
+
+/* Goal Progress Modal */
+.goal-progress-modal {
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.progress-notes {
+  margin: 20px 0;
+}
+
+.progress-notes h4 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.dark-mode .progress-notes h4 {
+  color: #1da1f2;
+}
+
+.progress-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.progress-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 8px 0;
+  background: #f1f1f1;
+  border-radius: 6px;
+  border-left: 3px solid #28a745;
+}
+
+.dark-mode .progress-item {
+  background: #444;
+  border-left-color: #4ade80;
+}
+
+.progress-item span {
+  flex: 1;
+  word-wrap: break-word;
+}
+
+.delete-progress-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  margin-left: 10px;
+  transition: background 0.3s;
+}
+
+.delete-progress-btn:hover {
+  background: #c82333;
+}
+
+.no-progress {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.dark-mode .no-progress {
+  color: #999;
+}
+
+.add-progress {
+  margin: 20px 0;
+}
+
+.add-progress textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.dark-mode .add-progress textarea {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.add-progress-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.add-progress-btn:hover {
+  background: #218838;
+}
+
+.dark-mode .add-progress-btn {
+  background: #4ade80;
+  color: #1e1e1e;
+}
+
+.dark-mode .add-progress-btn:hover {
+  background: #22c55e;
 }
 
 .save-btn {

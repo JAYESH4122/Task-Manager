@@ -3,12 +3,15 @@ import Task from "../models/Task.js";
 // Create Task
 export const createTask = async (req, res) => {
   try {
-    const taskCount = await Task.countDocuments(); // Get the total number of tasks
+    const { type = "daily" } = req.body;
+    const taskCount = await Task.countDocuments({ type });
     const newTask = await Task.create({
       title: req.body.title,
       description: req.body.description || "",
       completed: false,
-      position: taskCount, // Assign position based on current count
+      position: taskCount,
+      type: type,
+      progress: type === "goal" ? [] : undefined,
     });
     res.status(201).json(newTask);
   } catch (err) {
@@ -30,11 +33,15 @@ export const getTasks = async (req, res) => {
 export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, completed } = req.body;
+    const updateData = {};
+    
+    if (req.body.title !== undefined) updateData.title = req.body.title;
+    if (req.body.description !== undefined) updateData.description = req.body.description;
+    if (req.body.completed !== undefined) updateData.completed = req.body.completed;
 
     const updatedTask = await Task.findByIdAndUpdate(
       id,
-      { title, description, completed },
+      updateData,
       { new: true }
     );
 
@@ -85,14 +92,70 @@ export const toggleComplete = async (req, res) => {
 // Reorder tasks (Drag & Drop Persistence)
 export const reorderTasks = async (req, res) => {
   try {
-    const { tasks } = req.body;
+    const { tasks, type } = req.body;
     if (!tasks || !Array.isArray(tasks)) return res.status(400).json({ error: "Invalid task order data" });
 
+    // Only update tasks of the specified type
     await Promise.all(tasks.map((task, index) => Task.findByIdAndUpdate(task._id, { position: index })));
 
     res.json({ message: "Task order updated successfully" });
   } catch (error) {
     res.status(500).json({ error: "Error updating task order" });
+  }
+};
+
+// Reset weekend tasks (set all weekend tasks to incomplete)
+export const resetWeekendTasks = async (req, res) => {
+  try {
+    const result = await Task.updateMany(
+      { type: "weekend" },
+      { completed: false }
+    );
+    res.json({ message: "Weekend tasks reset successfully", count: result.modifiedCount });
+  } catch (error) {
+    res.status(500).json({ error: "Error resetting weekend tasks" });
+  }
+};
+
+// Add progress note to goal task
+export const addGoalProgress = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { progressNote } = req.body;
+
+    if (!progressNote || !progressNote.trim()) {
+      return res.status(400).json({ error: "Progress note is required" });
+    }
+
+    const task = await Task.findById(id);
+    if (!task) return res.status(404).json({ error: "Task not found" });
+    if (task.type !== "goal") return res.status(400).json({ error: "Task is not a goal task" });
+
+    task.progress.push(progressNote.trim());
+    await task.save();
+
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ error: "Error adding progress note" });
+  }
+};
+
+// Update goal progress (edit or delete progress notes)
+export const updateGoalProgress = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { progress } = req.body; // Array of progress notes
+
+    const task = await Task.findById(id);
+    if (!task) return res.status(404).json({ error: "Task not found" });
+    if (task.type !== "goal") return res.status(400).json({ error: "Task is not a goal task" });
+
+    task.progress = progress || [];
+    await task.save();
+
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating progress notes" });
   }
 };
 

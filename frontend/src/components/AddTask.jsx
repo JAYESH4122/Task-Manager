@@ -2,12 +2,12 @@ const API_URL = import.meta.env.VITE_API_URL;
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { TextField, Button, Paper, Typography } from "@mui/material";
+import { TextField, Button, Paper, Typography, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import { motion } from "framer-motion";
 import "../styles/AddTask.css";
 
 const AddTask = () => {
-  const [task, setTask] = useState({ title: "", description: "" });
+  const [task, setTask] = useState({ title: "", description: "", type: "daily" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -58,6 +58,22 @@ const AddTask = () => {
               rows={3}
               className="task-input"
             />
+
+            {/* Task Type */}
+            <FormControl fullWidth className="task-input">
+              <InputLabel>Task Type</InputLabel>
+              <Select
+                name="type"
+                value={task.type}
+                onChange={handleChange}
+                label="Task Type"
+                required
+              >
+                <MenuItem value="daily">Daily Task</MenuItem>
+                <MenuItem value="weekend">Weekend Task</MenuItem>
+                <MenuItem value="goal">Goal Task</MenuItem>
+              </Select>
+            </FormControl>
 
             {/* Submit Button */}
             <Button type="submit" variant="contained" className="submit-btn">

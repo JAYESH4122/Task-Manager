@@ -5,7 +5,10 @@ import {
   updateTask,
   deleteTask,
   reorderTasks,
-  toggleComplete, // Added toggleComplete route
+  toggleComplete,
+  resetWeekendTasks,
+  addGoalProgress,
+  updateGoalProgress,
 } from "../controllers/taskController.js";
 
 const router = express.Router();
@@ -13,9 +16,11 @@ const router = express.Router();
 router.post("/", createTask);
 router.get("/", getTasks);
 router.put("/:id", updateTask);
-router.put("/complete/:id", toggleComplete); // Route for toggling task completion
+router.put("/complete/:id", toggleComplete);
 router.delete("/:id", deleteTask);
 router.put("/reorder", reorderTasks);
- // New route for reordering tasks
+router.put("/reset-weekend", resetWeekendTasks);
+router.post("/goal/:id/progress", addGoalProgress);
+router.put("/goal/:id/progress", updateGoalProgress);
 
 export default router;

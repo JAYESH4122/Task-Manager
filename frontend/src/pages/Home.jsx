@@ -12,7 +12,7 @@ export default function Home() {
     .catch(error => console.error(error));
   
   }, []);
-
+``
   return (
     <div className="container mx-auto p-4">
       <TaskForm setTasks={setTasks} />
