@@ -95,11 +95,17 @@ export const reorderTasks = async (req, res) => {
     const { tasks, type } = req.body;
     if (!tasks || !Array.isArray(tasks)) return res.status(400).json({ error: "Invalid task order data" });
 
-    // Only update tasks of the specified type
-    await Promise.all(tasks.map((task, index) => Task.findByIdAndUpdate(task._id, { position: index })));
+    // Update positions for tasks of the specified type
+    const updatePromises = tasks.map((task, index) => {
+      const taskId = task._id || task.id;
+      return Task.findByIdAndUpdate(taskId, { position: index }, { new: true });
+    });
+
+    await Promise.all(updatePromises);
 
     res.json({ message: "Task order updated successfully" });
   } catch (error) {
+    console.error("Reorder error:", error);
     res.status(500).json({ error: "Error updating task order" });
   }
 };

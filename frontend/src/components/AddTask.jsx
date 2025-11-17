@@ -1,14 +1,20 @@
 const API_URL = import.meta.env.VITE_API_URL;
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { TextField, Button, Paper, Typography, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import { motion } from "framer-motion";
 import "../styles/AddTask.css";
 
 const AddTask = () => {
-  const [task, setTask] = useState({ title: "", description: "", type: "daily" });
+  const [searchParams] = useSearchParams();
+  const typeFromUrl = searchParams.get("type") || "daily";
+  const [task, setTask] = useState({ title: "", description: "", type: typeFromUrl });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setTask((prev) => ({ ...prev, type: typeFromUrl }));
+  }, [typeFromUrl]);
 
   const handleChange = (e) => {
     setTask({ ...task, [e.target.name]: e.target.value });
@@ -16,8 +22,19 @@ const AddTask = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${API_URL}/`, task);
-    navigate("/");
+    try {
+      await axios.post(`${API_URL}/`, task);
+      // Navigate back to the appropriate page
+      if (task.type === "weekend") {
+        navigate("/weekend");
+      } else if (task.type === "goal") {
+        navigate("/goals");
+      } else {
+        navigate("/daily");
+      }
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
 
   return (
